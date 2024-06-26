@@ -10,10 +10,7 @@ import requests
 import lxml
 
 response= requests.get(PRODUCT_URL, headers=header)
-# soup= BeautifulSoup(response.text, "html.parser")
-#
-# price_of_product= soup.find(name="span", class_="a-offscreen")
-# print(price_of_product.text)
+
 
 soup = BeautifulSoup(response.content, "lxml")
 # print(soup.prettify())
@@ -25,29 +22,13 @@ print(price_as_float)
 
 if price_as_float<70.00:
     #sending email to notify the drop down of the price of product
-    my_email = "vishnurao443@gmail.com"
-    password = "nueo vbea hpfa zfha"
+    my_email = "YOUR EMAIL 1"
+    password = "PASSWORD"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(user=my_email, password=password)
         connection.sendmail(from_addr=my_email,
-                            to_addrs="nikkitasahu335@gmail.com",
+                            to_addrs="YOUR EMAIL 2",
                             msg=f"subject:Product Price reduced. \n\n The Nike basketball shoes price is reduced to{price_as_float} and the link is {PRODUCT_URL}"
                             )
 
-# title = soup.find(id="productTitle").get_text().strip()
-# print(title)
-#
-# BUY_PRICE = 71
-#
-# if price_as_float < BUY_PRICE:
-#     message = f"{title} is now {price}"
-#
-#     with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
-#         connection.starttls()
-#         result = connection.login("vishnurao443@gmail.com", "nueo vbea hpfa zfha")
-#         connection.sendmail(
-#             from_addr="vishnurao443@gmail.com",
-#             to_addrs="nikkitasahu335@gmail.com",
-#             msg=f"Subject:Amazon Price Alert!\n\n{message}\n{PRODUCT_URL}".encode("utf-8")
-#         )
